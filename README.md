@@ -14,7 +14,7 @@
 
 ## 과제 프로젝트의 스펙은 다음과 같아요
 
-![sample](./doc/page-flow.png)
+![sample](./docs/page-flow.png)
 
 제공된 샘플 이미지를 확인하시고 아래 요구사항을 충족하는 페이지를 만들어주세요.
 

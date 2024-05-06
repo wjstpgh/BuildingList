@@ -4,9 +4,12 @@ import DynamicTable from "../common/dynamicTable";
 import { BuildingsData, DetailBuildingData, getBuildingColumns } from "./data";
 import Loading from "../common/loading";
 import BuildingDetail from "./detailBuilding";
+import { useRecoilState } from "recoil";
+import { buildingList } from "../../store";
 
 const BuildingList = () => {
   const [selectedId, setSelectedId] = useState("");
+  const [compareList, setCompareList] = useRecoilState(buildingList);
 
   const { data: getBuildingData, isLoading: getBuildingLoading } =
     useSWRAxios<BuildingsData>({
@@ -18,8 +21,8 @@ const BuildingList = () => {
     });
 
   useEffect(() => {
-    console.log(getSelectedBuilding);
-  }, [getSelectedBuilding]);
+    console.log(compareList);
+  }, [compareList]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-y-[80px]">
@@ -27,7 +30,7 @@ const BuildingList = () => {
       {getBuildingLoading && <Loading />}
       {getBuildingData?.data && (
         <DynamicTable
-          columns={getBuildingColumns()}
+          columns={getBuildingColumns({ compareList, setCompareList })}
           data={getBuildingData.data}
           selectedId={selectedId}
           setSelectedId={setSelectedId}

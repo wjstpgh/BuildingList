@@ -55,7 +55,6 @@ export default function DynamicTable<T extends object>({
                       : "odd:text-gray-50 even:text-gray-800 odd:bg-[rgba(75,75,75,0.8)] even:bg-[rgba(175,175,175,0.5)] hover:bg-[rgba(136,112,237,0.9)]"
                   } duration-[.3s] cursor-pointer`,
                 })}
-                onClick={() => setSelectedId(row.cells[0].value)}
               >
                 {row.cells.map((cell) => (
                   <td
@@ -64,6 +63,10 @@ export default function DynamicTable<T extends object>({
                     {...cell.getCellProps({
                       className: "p-[5px] text-center",
                     })}
+                    onClick={() => {
+                      cell.column.id !== "checkbox" &&
+                        setSelectedId(cell.row.allCells[0].value);
+                    }}
                   >
                     {cell.render("Cell") as ReactNode}
                   </td>

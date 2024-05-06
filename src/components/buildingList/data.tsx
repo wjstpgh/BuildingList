@@ -1,5 +1,7 @@
 import { Column } from "react-table";
 import { parseNum } from "../../utils";
+import CheckBox from "../common/checkBox";
+import { SetterOrUpdater } from "recoil";
 
 interface Buildings {
   id: string;
@@ -47,13 +49,37 @@ export interface DetailBuildingData {
   data: DetailBuilding;
 }
 
-export const getBuildingColumns = (): Column<Buildings>[] => {
+interface GetBuildingColumnsProps {
+  compareList: string[];
+  setCompareList: SetterOrUpdater<string[]>;
+}
+
+export const getBuildingColumns = ({
+  compareList,
+  setCompareList,
+}: GetBuildingColumnsProps): Column<Buildings>[] => {
+  const selecteBuildingToCompare = (seleteId: string) => {
+    setCompareList((prev) =>
+      prev.includes(seleteId)
+        ? prev.filter((el) => el !== seleteId)
+        : compareList.length < 10
+        ? prev.concat(seleteId)
+        : prev
+    );
+  };
+
   return [
     {
       id: "checkbox",
       Header: "",
       accessor: "id",
-      Cell: ({ cell }) => <div>체크박스</div>,
+      Cell: ({ cell }) => (
+        <CheckBox
+          id={cell.value}
+          checked={compareList.includes(cell.value)}
+          onClick={() => selecteBuildingToCompare(cell.value)}
+        />
+      ),
     },
     { id: "buildingName", Header: "건물명", accessor: "buildingName" },
     { id: "address", Header: "주소", accessor: "address" },

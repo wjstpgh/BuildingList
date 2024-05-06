@@ -6,12 +6,15 @@ import enableMock from "./mock";
 
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 
 enableMock();
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <RecoilRoot>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </RecoilRoot>
 );

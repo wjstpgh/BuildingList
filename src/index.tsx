@@ -5,8 +5,13 @@ import App from "./app/App";
 import enableMock from "./mock";
 
 import "./index.css";
+import { BrowserRouter } from "react-router-dom";
 
 enableMock();
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
-root.render(<App />);
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);

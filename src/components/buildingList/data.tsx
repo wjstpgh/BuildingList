@@ -21,8 +21,30 @@ interface Buildings {
   vacancyRate: number;
 }
 
+export interface DetailBuilding
+  extends Omit<
+    Buildings,
+    "buildingName" | "maintenanceFee" | "nla" | "vacancyRate"
+  > {
+  architectureArea: number;
+  bcRat: number;
+  image: string;
+  landPurpose: string;
+  mainPurpose: string;
+  maintenanceFee: number;
+  platArea: number;
+  totalPark: number;
+  transactionDate: { year: number; month: number };
+  transactionPrice: number;
+  vlRat: number;
+}
+
 export interface BuildingsData {
   data: Buildings[];
+}
+
+export interface DetailBuildingData {
+  data: DetailBuilding;
 }
 
 export const getBuildingColumns = (): Column<Buildings>[] => {

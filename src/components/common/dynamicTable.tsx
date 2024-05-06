@@ -1,14 +1,18 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { useTable, Column } from "react-table";
 
 interface DynamicTableProps<T extends object> {
   data: T[];
   columns: Column<T>[];
+  selectedId: string;
+  setSelectedId: Dispatch<SetStateAction<string>>;
 }
 
 export default function DynamicTable<T extends object>({
   data,
   columns,
+  selectedId,
+  setSelectedId,
 }: DynamicTableProps<T>) {
   const tableInstance = useTable<T>({ columns, data });
 
@@ -45,9 +49,13 @@ export default function DynamicTable<T extends object>({
                 // @ts-ignore
                 key={row.id}
                 {...row.getRowProps({
-                  className:
-                    "h-[50px] odd:text-gray-50 even:text-gray-800 odd:bg-[rgba(75,75,75,0.8)] even:bg-[rgba(175,175,175,0.5)]",
+                  className: `h-[50px] ${
+                    selectedId === row.cells[0].value
+                      ? "text-[rgb(136,112,237)] bg-[rgba(136,112,237,0.4)]"
+                      : "odd:text-gray-50 even:text-gray-800 odd:bg-[rgba(75,75,75,0.8)] even:bg-[rgba(175,175,175,0.5)] hover:bg-[rgba(136,112,237,0.9)]"
+                  } duration-[.3s] cursor-pointer`,
                 })}
+                onClick={() => setSelectedId(row.cells[0].value)}
               >
                 {row.cells.map((cell) => (
                   <td

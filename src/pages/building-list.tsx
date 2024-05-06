@@ -1,7 +1,8 @@
 import React from "react";
+import BuildingList from "../components/buildingList";
 
-const BuildingList = () => {
-  return <div>list bhild</div>;
+const BuildingListPage = () => {
+  return <BuildingList />;
 };
 
-export default BuildingList;
+export default BuildingListPage;

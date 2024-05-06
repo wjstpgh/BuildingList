@@ -1,13 +1,20 @@
-import MockSamples from "./MockSamples";
+import { Suspense, lazy } from "react";
+import Loading from "../components/common/loading";
+import { Route, Routes } from "react-router-dom";
+
+const BuildingList = lazy(() => import("../pages/building-list"));
+const BuildingCompare = lazy(() => import("../pages/building-compare"));
 
 function App() {
   return (
-    <div className="w-full border border-black m-3 p-1">
-      <main>
-        <div>알스퀘어 Frontend 과제입니다.</div>
-        <MockSamples />
+    <Suspense fallback={<Loading />}>
+      <main className="w-screen min-h-screen flex flex-col justify-center items-center overflow-hidden">
+        <Routes>
+          <Route index element={<BuildingList />} />
+          <Route path="compare" element={<BuildingCompare />} />
+        </Routes>
       </main>
-    </div>
+    </Suspense>
   );
 }
 

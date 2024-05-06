@@ -26,7 +26,7 @@ const generateMockBuildings = () => {
   return buildings;
 };
 
-const generateMockBuildingDetail = (id) => {
+const generateMockBuildingDetail = (id: string) => {
   const building = {
     id,
     address: `${faker.location.city()} ${faker.location.streetAddress()} ${faker.location.secondaryAddress()}`,

@@ -24,11 +24,7 @@ interface Buildings {
   vacancyRate: number;
 }
 
-export interface DetailBuilding
-  extends Omit<
-    Buildings,
-    "buildingName" | "maintenanceFee" | "nla" | "vacancyRate"
-  > {
+export interface DetailBuilding extends Omit<Buildings, "nla" | "vacancyRate"> {
   architectureArea: number;
   bcRat: number;
   image: string;

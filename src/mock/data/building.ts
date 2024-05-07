@@ -30,6 +30,7 @@ const generateMockBuildingDetail = (id: string) => {
   const building = {
     id,
     address: `${faker.location.city()} ${faker.location.streetAddress()} ${faker.location.secondaryAddress()}`,
+    buildingName: faker.company.name(),
     image: faker.image.urlLoremFlickr({
       category: "city",
       width: 400,

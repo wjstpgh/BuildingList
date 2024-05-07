@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useSWRAxios from "../../hooks/useSWRAxios";
 import DynamicTable from "../common/dynamicTable";
 import { BuildingsData, DetailBuildingData, getBuildingColumns } from "./data";
@@ -30,7 +30,7 @@ const BuildingList = () => {
     });
   const { data: getSelectedBuilding, isLoading: getSelectedBuildingLoading } =
     useSWRAxios<DetailBuildingData>({
-      url: selectedId !== "" ? ` building/${selectedId}` : "",
+      url: selectedId !== "" ? `building/${selectedId}` : "",
     });
 
   const goToCompare = () => {
@@ -41,10 +41,6 @@ const BuildingList = () => {
       push("/building-compare");
     }
   };
-
-  useEffect(() => {
-    console.log(compareList);
-  }, [compareList]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-y-[40px] py-[40px]">

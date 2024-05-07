@@ -14,7 +14,7 @@
 
 ## 과제 프로젝트의 스펙은 다음과 같아요
 
-![sample](./docs/page-flow.png)
+![sample](./page-flow.png)
 
 제공된 샘플 이미지를 확인하시고 아래 요구사항을 충족하는 페이지를 만들어주세요.
 
@@ -24,7 +24,7 @@
 
 ### 1. 빌딩 목록 페이지
 
-![buldinglist](./docs/buildinglist-page.png)
+![buldinglist](./buildinglist-page.png)
 
 빌딩 목록 페이지에 적절한 내용을 보여주세요.
 
@@ -44,13 +44,13 @@
 
 테이블은 아래 가이드라인을 참고해서 구현해주세요. 디테일한 설정은 편하게 적용해주시면 좋아요!
 
-![table](./docs/table-component.png)
+![table](./table-component.png)
 
 #### 차트보기
 
 빌딩 상세 정보에서 `차트` 버튼을 클릭해서 일부 항목의 변동값을 확인할 수 있는 Dialog를 구현해주세요.
 
-![chart](./docs/chart.png)
+![chart](./chart.png)
 
 차트 정보는 `chart/:id` API 호출을 통해 확인하실 수 있습니다.
 
@@ -74,7 +74,7 @@
 
 각 Column의 값은 빌딩들의 값을 비교하여 `최대`, `최소` 값을 다른 UI로 표시될 수 있도록 해주세요.
 
-![builingcompare](./docs/buildingcompare-page.png)
+![builingcompare](./buildingcompare-page.png)
 
 빌딩 비교 페이지에서 빌딩 목록 페이지로 이동했을 때, 선택된 빌딩은 유지될 수 있어야 합니다.
 

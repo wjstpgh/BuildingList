@@ -14,7 +14,7 @@ const BuildingDetail = ({ detailBuildingData }: DetailBuildingProps) => {
   const [isChartOpen, setIsChartOpen] = useState(false);
 
   return (
-    <div className="grid grid-cols-3 w-[95vw] gap-x-[20px]">
+    <div className="grid grid-cols-3 w-[90vw] gap-x-[20px]">
       <div>
         <img
           src={detailBuildingData.image}

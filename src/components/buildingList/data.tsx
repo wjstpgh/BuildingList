@@ -2,6 +2,7 @@ import { Column } from "react-table";
 import { parseNum } from "../../utils";
 import CheckBox from "../common/checkBox";
 import { SetterOrUpdater } from "recoil";
+import { modalContents } from ".";
 
 interface Buildings {
   id: string;
@@ -23,11 +24,7 @@ interface Buildings {
   vacancyRate: number;
 }
 
-export interface DetailBuilding
-  extends Omit<
-    Buildings,
-    "buildingName" | "maintenanceFee" | "nla" | "vacancyRate"
-  > {
+export interface DetailBuilding extends Omit<Buildings, "nla" | "vacancyRate"> {
   architectureArea: number;
   bcRat: number;
   image: string;
@@ -52,20 +49,30 @@ export interface DetailBuildingData {
 interface GetBuildingColumnsProps {
   compareList: string[];
   setCompareList: SetterOrUpdater<string[]>;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalContent: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const getBuildingColumns = ({
   compareList,
   setCompareList,
+  setIsModalOpen,
+  setModalContent,
 }: GetBuildingColumnsProps): Column<Buildings>[] => {
   const selecteBuildingToCompare = (seleteId: string) => {
-    setCompareList((prev) =>
-      prev.includes(seleteId)
-        ? prev.filter((el) => el !== seleteId)
-        : compareList.length < 10
-        ? prev.concat(seleteId)
-        : prev
-    );
+    setCompareList((prev) => {
+      if (prev.includes(seleteId)) {
+        return prev.filter((el) => el !== seleteId);
+      } else {
+        if (compareList.length < 10) {
+          return prev.concat(seleteId);
+        } else {
+          setModalContent(modalContents.fullList);
+          setIsModalOpen(true);
+          return prev;
+        }
+      }
+    });
   };
 
   return [

@@ -1,7 +1,8 @@
 import React from "react";
+import BuildingCompare from "../components/buildingCompare";
 
-const BuildingCompare = () => {
-  return <div>compare</div>;
+const BuildingComparePage = () => {
+  return <BuildingCompare />;
 };
 
-export default BuildingCompare;
+export default BuildingComparePage;

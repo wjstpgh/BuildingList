@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DetailBuilding } from "../data";
 import { parseNum } from "../../../utils";
 import Button from "../../common/button";
+import Chart from "../../chart";
 
 interface DetailBuildingProps {
   detailBuildingData: DetailBuilding;
@@ -82,6 +83,13 @@ const BuildingDetail = ({ detailBuildingData }: DetailBuildingProps) => {
           />
         </div>
       </div>
+      {isChartOpen && (
+        <Chart
+          id={detailBuildingData.id}
+          name={detailBuildingData.buildingName}
+          onClickClose={() => setIsChartOpen(false)}
+        />
+      )}
     </div>
   );
 };

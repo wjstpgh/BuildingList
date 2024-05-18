@@ -7,6 +7,9 @@ interface ModalProps {
   btnText?: string;
 }
 
+// @suggestion 모달은 가능하면, React Portal로 분리하는 것이 좋다
+// 스타일을 적용하는데에 있어서 독립성
+// 기존 DOM 트리와 분리해서 rendering 최적화
 const Modal = ({
   inlineContent,
   onClickClose,

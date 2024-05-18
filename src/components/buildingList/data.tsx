@@ -1,9 +1,10 @@
 import { Column } from "react-table";
-import { parseNum } from "../../utils";
+import { numberToString } from "../../utils/number";
 import CheckBox from "../common/checkBox";
 import { SetterOrUpdater } from "recoil";
 import { modalContents } from ".";
 
+// @suggestion 타입(types.ts) 폴더와 상수(data.ts)를 모으는 파일 분리
 interface Buildings {
   id: string;
   address: string;
@@ -53,6 +54,9 @@ interface GetBuildingColumnsProps {
   setModalContent: React.Dispatch<React.SetStateAction<string>>;
 }
 
+// @suggestion hooks의 set함수를 인자로 넣는 것은
+// 해당 함수에 set함수의 의존성을 주는것이라서, 유지보수 측면에서 좋지 않음
+// 차라리, selectedBuildingToCompare를 onCheckboxClick(value) => {} 같은 함수를 외부에서 주입할 수 있게 하는 것이 나을듯
 export const getBuildingColumns = ({
   compareList,
   setCompareList,
@@ -84,6 +88,7 @@ export const getBuildingColumns = ({
         <CheckBox
           id={cell.value}
           checked={compareList.includes(cell.value)}
+          // onClick={(cell.value) => onCheckboxClick(cell.value)}
           onClick={() => selecteBuildingToCompare(cell.value)}
         />
       ),
@@ -106,7 +111,7 @@ export const getBuildingColumns = ({
       id: "totalArea",
       Header: "연면적",
       accessor: "totalArea",
-      Cell: ({ cell }) => <div>{parseNum(cell.value)}평</div>,
+      Cell: ({ cell }) => <div>{numberToString(cell.value)}평</div>,
     },
     {
       id: "nla",
@@ -128,19 +133,19 @@ export const getBuildingColumns = ({
       id: "deposit",
       Header: "보증금",
       accessor: "deposit",
-      Cell: ({ cell }) => <div>{parseNum(cell.value)}원/평</div>,
+      Cell: ({ cell }) => <div>{numberToString(cell.value)}원/평</div>,
     },
     {
       id: "rentFee",
       Header: "임대료",
       accessor: "rentFee",
-      Cell: ({ cell }) => <div>{parseNum(cell.value)}원/평</div>,
+      Cell: ({ cell }) => <div>{numberToString(cell.value)}원/평</div>,
     },
     {
       id: "maintenanceFee",
       Header: "관리비",
       accessor: "maintenanceFee",
-      Cell: ({ cell }) => <div>{parseNum(cell.value)}원/평</div>,
+      Cell: ({ cell }) => <div>{numberToString(cell.value)}원/평</div>,
     },
     {
       id: "vacancyRate",

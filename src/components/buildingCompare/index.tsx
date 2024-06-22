@@ -6,21 +6,26 @@ import { buildingList } from "../../store";
 import axios from "axios";
 import { DetailBuildingData } from "../buildingList/data";
 import Loading from "../common/loading";
-import { parseNum } from "../../utils";
-import { defaultCompareBuildingList } from "./data";
+import { numberToString } from "../../utils/number";
+import { DEFAULT_COMPARE_BUILDING_LIST } from "./data";
+import { PATH } from "../../constants/path";
 
 const BuildingCompare = () => {
   const [compareBuildingList, setCompareBuildingList] = useState(
-    defaultCompareBuildingList
+    DEFAULT_COMPARE_BUILDING_LIST,
   );
   const [isLoading, setIsLoading] = useState(false);
+  // 새로고침했을때도, 유지가 될 수 있게 session storage 활용
+  // library -> recoil-persist
   const compareBuildingKeyList = useRecoilValue(buildingList);
   const push = useNavigate();
 
   const goToHome = () => {
-    push("/");
+    push(PATH.HOME);
   };
 
+  // @suggestion Promise.all로 구현하는 것을 어떨지
+  // setIsLoading을 매번 해야할까? 한번의 set으로 처리 가능하지 않을까
   const hydrateCompareList = useCallback(async () => {
     compareBuildingKeyList.forEach(async (key) => {
       setIsLoading(true);
@@ -32,8 +37,8 @@ const BuildingCompare = () => {
         const newList = prev;
         Object.keys(newList).forEach((category) =>
           newList[category as keyof typeof prev].data.push(
-            buildingData[category as keyof typeof prev] as never
-          )
+            buildingData[category as keyof typeof prev] as never,
+          ),
         );
 
         return newList;
@@ -63,6 +68,9 @@ const BuildingCompare = () => {
               className="flex gap-x-[20px] [&>div]:w-[200px] [&>div]:shrink-0 [&>div]:flex [&>div]:items-center"
             >
               <div>{value.view}</div>
+              {/*과도한 삼항 연산자 -> 복잡성을 추가*/}
+              {/*로직의 분리를 통한 가독성 향상*/}
+              {/*해당 부분을 display 해주는 Component 함수 구현(switch-case)*/}
               {value.data.map((data, idx) =>
                 category === "buildingName" ? (
                   <div key={`${category}${idx}`}>{data as string}</div>
@@ -96,7 +104,7 @@ const BuildingCompare = () => {
                       Math.max(...(value.data as number[])) === data &&
                       "text-[#8870ED]"
                     }`}
-                  >{`${parseNum(data as number)}원`}</div>
+                  >{`${numberToString(data as number)}원`}</div>
                 ) : (
                   <div
                     key={`${category}${idx}`}
@@ -107,8 +115,8 @@ const BuildingCompare = () => {
                       Math.max(...(value.data as number[])) === data &&
                       "text-[#8870ED]"
                     }`}
-                  >{`${parseNum(data as number)}원/평`}</div>
-                )
+                  >{`${numberToString(data as number)}원/평`}</div>
+                ),
               )}
             </div>
           ))

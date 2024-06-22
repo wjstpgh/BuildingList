@@ -39,7 +39,10 @@ type CompareBuildingList = {
   };
 };
 
-export const defaultCompareBuildingList: CompareBuildingList = {
+/*
+ * @comment 상수는 항상 대문자로 하면, 구분이 쉬움
+ * */
+export const DEFAULT_COMPARE_BUILDING_LIST: CompareBuildingList = {
   buildingName: {
     view: "비교빌딩",
     data: [],

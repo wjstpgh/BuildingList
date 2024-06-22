@@ -1,4 +1,5 @@
-export const parseNum = (num: number) => {
+// toLocaleString 처리 필요
+export const numberToString = (num: number) => {
   const numToStr = String(num);
   if (numToStr.length < 5) return numToStr;
   else if (numToStr.length < 9)
@@ -6,6 +7,6 @@ export const parseNum = (num: number) => {
   else
     return `${numToStr.slice(0, -8)}억${numToStr.slice(
       -8,
-      -4
+      -4,
     )}만${numToStr.slice(-4)}`;
 };

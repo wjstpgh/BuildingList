@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DetailBuilding } from "../data";
-import { parseNum } from "../../../utils";
+import { numberToString } from "../../../utils/number";
 import Button from "../../common/button";
 import Chart from "../../chart";
 
@@ -32,7 +32,7 @@ const BuildingDetail = ({ detailBuildingData }: DetailBuildingProps) => {
         </div>
         <div className={detailDescClass}>
           <span>연면적</span>
-          <span>{parseNum(detailBuildingData.totalArea)}평</span>
+          <span>{numberToString(detailBuildingData.totalArea)}평</span>
         </div>
         <div className={detailDescClass}>
           <span>건폐율</span>
@@ -60,11 +60,11 @@ const BuildingDetail = ({ detailBuildingData }: DetailBuildingProps) => {
       <div>
         <div className={detailDescClass}>
           <span>대지면적</span>
-          <span>{parseNum(detailBuildingData.platArea)}평</span>
+          <span>{numberToString(detailBuildingData.platArea)}평</span>
         </div>
         <div className={detailDescClass}>
           <span>건축면적</span>
-          <span>{parseNum(detailBuildingData.architectureArea)}평</span>
+          <span>{numberToString(detailBuildingData.architectureArea)}평</span>
         </div>
         <div className={detailDescClass}>
           <span>용적율</span>
